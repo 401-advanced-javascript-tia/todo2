@@ -2,6 +2,14 @@ import React, { useEffect, useState } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+
+
+
 import './todo.scss';
 
 
@@ -75,25 +83,51 @@ function Todo(props) {
 
   return (
     <>
-      <section>
-        <h2>
-        There are {list.filter(item => !item.complete).length} Items To Complete
-        </h2>
-      </section>
 
-      <section className="todo">
+      <Container>
 
-        <div>
-          <TodoForm handleFormSubmitToSendToList={_addItem} />
-        </div>
 
-        <div>
-          <TodoList
-            list={list}
-            handleComplete={_toggleComplete}
-          />
-        </div>
-      </section>
+        <Row>
+
+          <Col>
+            <header>
+
+              <Navbar bg="dark" variant="dark">
+                <Nav className="mr-auto">
+                
+                  <Navbar.Brand href="#home">
+                    To-Do List Manager ( {list.filter(item => !item.complete).length} )
+                  </Navbar.Brand>
+
+                </Nav>
+              </Navbar>
+
+            </header>
+          </Col>
+
+        </Row>
+
+
+
+        <Row>
+
+          <Col sm={4}>
+            <div>
+            <TodoForm handleFormSubmitToSendToList={_addItem} />
+            </div>
+          </Col>
+
+          <Col sm={6}>
+            <div>
+            <TodoList list={list} handleComplete={_toggleComplete} />
+            </div>
+          </Col>
+
+        </Row>
+
+
+      </Container>
+
     </>
   );
 

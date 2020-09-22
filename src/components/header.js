@@ -6,9 +6,10 @@ function Header() {
 
   return(
     <header>
-      <Navbar>
-        <Nav>
-          <Nav.Link>Home</Nav.Link>
+
+      <Navbar bg="primary" variant="dark">
+        <Nav className="mr-auto">
+          <Nav.Link href="#home">Home</Nav.Link>
         </Nav>
       </Navbar>
 
