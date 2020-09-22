@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom';
 
 import App from './app.js';
 
-class Main extends React.Component {
-  render() {
-    return <App />;
-  }
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+function Main() {
+
+  return <App />;
+
 }
+
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(<Main />, rootElement);
