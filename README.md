@@ -2,7 +2,7 @@
 A web-based task manager application, written in React.
 
 ## Version
-0.1.0
+0.2.0
 
 ## Auther
 - Tia Low
@@ -12,7 +12,8 @@ Full-stack JavaScript developer with a diverse background of personal and profes
 - [Linkedin](https://www.linkedin.com/in/tia-low/)
 
 ## Collaborations and Resources
-- 
+- Alex Whan: [GitHub](https://github.com/alex-whan)
+- Josh Beasley: [GitHub](https://github.com/beasleydotcom)
 
 ## Description
 

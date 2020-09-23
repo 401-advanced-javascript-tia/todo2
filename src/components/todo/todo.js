@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-
+import axios from 'axios';
 
 import './todo.scss';
 
@@ -40,17 +40,27 @@ function Todo(props) {
 
   };
 
-  useEffect(() => {
+  // useEffect is the new way to do componentDidMount
+  useEffect(async () => {
 
-    let defaultList = [
-      { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A'},
-      { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A'},
-      { _id: 3, complete: false, text: 'Walk the Dog', difficulty: 4, assignee: 'Person B'},
-      { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C'},
-      { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B'},
-    ];
+    // can pull out url to .env
+    const response = await axios.get('http://localhost:3000/api/v1/todos');
+
+    console.log(response.data);
+
+    setList(response.data.results);
+
+    // let defaultList = [
+    //   { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A'},
+    //   { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A'},
+    //   { _id: 3, complete: false, text: 'Walk the Dog', difficulty: 4, assignee: 'Person B'},
+    //   { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C'},
+    //   { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B'},
+    // ];
+
+    // setList(defaultList);
+
     
-    setList(defaultList);
 
   }, []);
   
