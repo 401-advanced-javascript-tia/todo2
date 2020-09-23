@@ -1,22 +1,20 @@
-'use strict';
-
 import { useState } from 'react';
 
 const useForm = (callback) => {
 
   const [ values, setValues ] = useState({});
 
-  const handleInputChange = (e) => {
-    e.persist();
-    setValues( {...values, [e.target.name]: e.target.value });
+  const handleInputChange = (event) => {
+    event.persist();
+    setValues( {...values, [event.target.name]: event.target.value });
     console.log('values in inputChange in form hook:', values);
   };
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (event) => {
 
-    e.preventDefault();
-    e.target.reset();
+    event.preventDefault();
+    event.target.reset();
     callback(values);
 
   };

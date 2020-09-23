@@ -17,6 +17,8 @@ function TodoForm(props) {
 
   function callback(name) {
     setFormData(name);
+    console.log('formData in callback', formData);
+    props.handleFormSubmitToSendToList(values);
   }
 
   // const _handleInputChange = e => {
@@ -33,6 +35,8 @@ function TodoForm(props) {
 
 
   return (
+    <>
+    <br />
     <Card>
       <Card.Body>
 
@@ -58,7 +62,7 @@ function TodoForm(props) {
 
       </Card.Body>
     </Card>
-  
+  </>
   );
 
   
