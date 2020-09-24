@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
+import Toast from 'react-bootstrap/Toast';
+
 
 function TodoList(props) {
 
   console.log('props in list.js:', props);
 
+  const [show, setShow] = useState(true);
+
+  const toggleShow = () => setShow(!show);
 
   return (
     <>
@@ -15,28 +20,31 @@ function TodoList(props) {
 
       <>
       <br/>
-    <Card border="dark" style={{ width: '18rem' }} key={item._id}>
-      <Card.Header>
 
+      <Toast key={item._id} show={show} onClose={() => 
+        props.handleDelete(item._id)
+        //  toggleShow()
+         }>
+        <Toast.Header>
+    
         {item.complete ? 
         <Badge pill variant="danger">Complete</Badge> : 
         <Badge pill variant="success">Pending</Badge>}
 
+        <strong className="mr-auto">&nbsp;&nbsp;{item.assignee}</strong>
+    
+        </Toast.Header>
 
+        <Toast.Body>
+        <strong>
+          <span onClick={() => props.handleComplete(item._id)}>{item.text}</span>
+        </strong><br/>
+        Difficulty: {item.difficulty}
+        </Toast.Body>
 
-        {item.assignee}</Card.Header>
-        <Card.Body>
-          <Card.Title>
-            <span onClick={() => props.handleComplete(item._id)}>{item.text}</span>
-          </Card.Title>
+      </Toast>
 
-          <Card.Text>
-            Difficulty: {item.difficulty}
-          </Card.Text>
-
-        </Card.Body>
-    </Card>
-  </>
+      </>
 
     ))}
   </>
