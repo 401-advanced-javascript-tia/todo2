@@ -8,15 +8,30 @@ import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
+import axios from 'axios';
+
+import useAjax from '../../hooks/useAjax.js';
 
 
 import './todo.scss';
 
 
+
+
+
 function Todo(props) {
 
+  const url = 'http://localhost:3000/api/v1/todos';
 
-  const [ list, setList ] = useState([]);
+  const { data, isLoading, setData } = useAjax(url);
+
+  console.log('++++++DATA FROM AJAX FILE IN TODO.JS', data);
+
+
+  
+  // const [ list, setList ] = useState([]);
+  // const [ isLoading, setIsLoading ] = useState(false);
+  
 
   const _addItem = (item) => {
 
@@ -24,49 +39,89 @@ function Todo(props) {
 
     item._id = Math.random();
     item.complete = false;
-    setList([ ...list, item]);
+    setData([ ...data, item]);
+
+    axios.post(url, {
+      text: item.text,
+      assignee : item.assignee,
+      complete: item.complete,
+      difficulty : item.difficulty,
+    })
 
   };
 
-  const _toggleComplete = id => {
 
-    let item = list.filter(i => i._id === id)[0] || {};
+  const _toggleComplete = (id) => {
 
+    let item = data.filter(i => i._id === id)[0] || {};
+
+    console.log('ITEM IN TOGGLECOMPLETE:::::', item);
+
+    
     if (item._id) {
+
       item.complete = !item.complete;
-      let updatedList = list.map(listItem => listItem._id === item._id ? item : listItem);
-      setList(updatedList);
+
+      axios.put(`${url}/${item._id}`, {
+      text: item.text,
+      assignee : item.assignee,
+      complete: item.complete,
+      difficulty : item.difficulty,
+    })
+
+      let updatedList = data.map(listItem => listItem._id === item._id ? item : listItem);
+      setData(updatedList);
     }
 
   };
 
-  useEffect(() => {
+  const _deleteItem =  async (id)  =>  {
 
-    let defaultList = [
-      { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A'},
-      { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A'},
-      { _id: 3, complete: false, text: 'Walk the Dog', difficulty: 4, assignee: 'Person B'},
-      { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C'},
-      { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B'},
-    ];
+
+    console.log('^^^^^^^^^ MADE IT TO DELETE ITEM:', id);
+
+    // let deletedItemRes = await 
+    axios.delete(`${url}/${id}`);
+
+    console.log('------ WHATS DONE IS DONE --------');
+    // console.log('DELETED ITEM RESPONSE: ', deletedItemRes);
+    console.log('@@@@@ data:', data);
     
-    setList(defaultList);
+    // ------the following works to remove the words from the relevant Toast, but it doesnt delete the actual Toast from the page
 
-  }, []);
+    // let item = data.filter(i => i._id === id)[0] || {};
+
+    // console.log('^^^^^^^ item:', item);
+
+
+    // for(let i = 0; i < data.length; i++){
+
+    //   if(data[i]._id === id){
+    //     data.splice(i, 1);
+    //   }
+    // }
+
+    // console.log('$$$$$$ DATA AFTER SPLICE', data);
+
+    
+    // setData([data]);
+
+
+  }
   
-  
-  console.log('list in todo.js:', list);
+
+  console.log('list in todo.js:', data);
 
 
 
   useEffect(() => {
   // document.title = `TITLETOWN`;
-  console.log('list in todo.js in useEffect :', list);
+  console.log('list in todo.js in useEffect :', data);
 
   let complete = 0;
   let incomplete = 0;
 
-  list.map(listItem => {
+  data.map(listItem => {
     if(listItem.complete === true) {
       complete = complete + 1;
     } else {
@@ -83,7 +138,7 @@ function Todo(props) {
 
   return (
     <>
-
+    <br />
       <Container>
 
 
@@ -96,7 +151,7 @@ function Todo(props) {
                 <Nav className="mr-auto">
                 
                   <Navbar.Brand href="#home">
-                    To-Do List Manager ( {list.filter(item => !item.complete).length} )
+                    To-Do List Manager ( {data.filter(item => !item.complete).length} )
                   </Navbar.Brand>
 
                 </Nav>
@@ -107,6 +162,13 @@ function Todo(props) {
 
         </Row>
 
+{/* 
+          {isLoading && 
+            <Row>
+              PUT A BOOTSTRAP LOADING INDICATOR HERE
+            </Row>
+          
+          } */}
 
 
         <Row>
@@ -119,7 +181,7 @@ function Todo(props) {
 
           <Col sm={6}>
             <div>
-            <TodoList list={list} handleComplete={_toggleComplete} />
+            <TodoList list={data} handleComplete={_toggleComplete} handleDelete={_deleteItem}/>
             </div>
           </Col>
 
