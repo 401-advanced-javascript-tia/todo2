@@ -75,19 +75,36 @@ function Todo(props) {
 
   };
 
-  const _deleteItem = (id) => {
+  const _deleteItem =  async (id)  =>  {
 
 
     console.log('^^^^^^^^^ MADE IT TO DELETE ITEM:', id);
 
-    axios.delete(`${url}/${id}`)
+    // let deletedItemRes = await 
+    axios.delete(`${url}/${id}`);
 
     console.log('------ WHATS DONE IS DONE --------');
+    // console.log('DELETED ITEM RESPONSE: ', deletedItemRes);
+    console.log('@@@@@ data:', data);
+    
+    // ------the following works to remove the words from the relevant Toast, but it doesnt delete the actual Toast from the page
 
-    // let updatedList = data.map(listItem => listItem._id === item._id ? item : listItem);
-    // setData(updatedList);
+    // let item = data.filter(i => i._id === id)[0] || {};
+
+    // console.log('^^^^^^^ item:', item);
 
 
+    // for(let i = 0; i < data.length; i++){
+
+    //   if(data[i]._id === id){
+    //     data.splice(i, 1);
+    //   }
+    // }
+
+    // console.log('$$$$$$ DATA AFTER SPLICE', data);
+
+    
+    // setData([data]);
 
 
   }

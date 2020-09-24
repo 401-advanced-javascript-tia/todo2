@@ -9,9 +9,9 @@ function TodoList(props) {
 
   console.log('props in list.js:', props);
 
-  const [show, setShow] = useState(true);
+  // const [show, setShow] = useState(true);
 
-  const toggleShow = () => setShow(!show);
+  // const toggleShow = () => setShow(!show);
 
   return (
     <>
@@ -21,7 +21,7 @@ function TodoList(props) {
       <>
       <br/>
 
-      <Toast key={item._id} show={show} onClose={() => 
+      <Toast key={item._id} onClose={() => 
         props.handleDelete(item._id)
         //  toggleShow()
          }>

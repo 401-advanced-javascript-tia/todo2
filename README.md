@@ -1,8 +1,8 @@
 # todo
-A web-based task manager application, written in React.
+A web-based task manager application, written in React. The online interface allows you to manage a visible list of to-do items in being able to add to it, delete, and update the 'complete' status. It features an intuitive and visually-appealing design using React Bootstrap components.
 
 ## Version
-0.2.0
+0.3.0
 
 ## Auther
 - Tia Low
@@ -15,7 +15,7 @@ Full-stack JavaScript developer with a diverse background of personal and profes
 - Alex Whan: [GitHub](https://github.com/alex-whan)
 - Josh Beasley: [GitHub](https://github.com/beasleydotcom)
 
-## Description
+## Build-Out Description
 
 ### **Phase 1: Application Setup**
 - Basic To Do List Management, setup foundational system using Hooks

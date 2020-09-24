@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 
 import axios from 'axios';
 
+//how would you config this file to use CORS, instead of having the CORS specification in the api-server file?
+
 
 const useAjax = (url) => {
 
@@ -27,7 +29,7 @@ const useAjax = (url) => {
     
     getData();
 
-  }, [url]);
+  }, []);
 
   console.log('data in USEAJAX', data);
   return { 
