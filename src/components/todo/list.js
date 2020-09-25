@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
-// import ListGroup from 'react-bootstrap/ListGroup';
-import Card from 'react-bootstrap/Card';
+import React from 'react';
+import Pagination from 'react-bootstrap/Pagination'
+
 import Badge from 'react-bootstrap/Badge';
 import Toast from 'react-bootstrap/Toast';
 
+//we want the context, not the provider (like in app.js)
+// import { SettingsContext } from '../../context/settings/settings-context.js';
+
+// import { LoginContext } from '../../context/auth/context.js';
 
 function TodoList(props) {
+  
+  // const settingsContext = useContext(SettingsContext);
+  // const authContext = useContext(LoginContext);
+
+
 
   console.log('props in list.js:', props);
 
@@ -13,10 +22,22 @@ function TodoList(props) {
 
   // const toggleShow = () => setShow(!show);
 
+  let active = 1;
+  let pageItems = [];
+  for (let number = 1; number <= 5; number++) {
+    pageItems.push(
+    <Pagination.Item key={number} active={number === active}>
+      {number}
+    </Pagination.Item>,
+  );
+}
+
+
   return (
     <>
 
     {props.list.map(item => (
+
 
       <>
       <br/>
@@ -47,6 +68,9 @@ function TodoList(props) {
       </>
 
     ))}
+
+      <Pagination>{pageItems}</Pagination>
+
   </>
 
   )

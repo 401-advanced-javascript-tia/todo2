@@ -5,8 +5,16 @@ import Button from 'react-bootstrap/Button';
 
 import useForm from '../../hooks/useForm.js';
 
+// import { SettingsContext } from '../../context/settings/settings-context.js';
+
 
 function TodoForm(props) {
+
+  // const context = useContext(SettingsContext);
+  // can now use context.display/hide
+  // context.numToDisplay
+  // context.sortByDifficulty
+  // context.pagination (???)
 
 
   // const [item, setItem] = useState({});
