@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import Header from '../header.js';
 
+import Header from '../header.js';
 import TodoForm from './form.js';
 import TodoList from './list.js';
 
@@ -10,9 +10,6 @@ import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Spinner from 'react-bootstrap/Spinner';
-
-
-// import axios from 'axios';
 
 import useAjax from '../../hooks/useAjax.js';
 
@@ -89,16 +86,6 @@ function Todo(props) {
       }
 
       request(options);
-
-    //   axios.put(`${url}/${item._id}`, {
-    //   text: item.text,
-    //   assignee : item.assignee,
-    //   complete: item.complete,
-    //   difficulty : item.difficulty,
-    // })
-
-    //   let updatedList = data.map(listItem => listItem._id === item._id ? item : listItem);
-    //   setData(updatedList);
     }
 
   };
@@ -107,21 +94,8 @@ function Todo(props) {
 
   useEffect(() => {
 
-  // let complete = 0;
-  // let incomplete = 0;
-
   let complete = list.filter(item => item.complete).length;
-
   let incomplete = list.filter(item => !item.complete).length;
-
-  // data.map(listItem => {
-  //   if(listItem.complete === true) {
-  //     complete = complete + 1;
-  //   } else {
-  //     incomplete = incomplete + 1;
-  //   }
-  // })
-
   document.title = `Done: ${complete} - Not Done: ${incomplete}`;
 
   }, );
