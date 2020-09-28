@@ -43,7 +43,6 @@ function TodoList(props) {
 
       <Toast key={item._id} onClose={() => 
         props.handleDelete(item._id)
-        //  toggleShow()
          }>
         <Toast.Header closeButton>
     
@@ -59,7 +58,7 @@ function TodoList(props) {
         <strong>
           <span >{item.text}</span>
         </strong><br/>
-        <small>Difficulty: {item.difficulty}</small>
+        <small style={{display: 'block', textAlign: 'right'}}>Difficulty: {item.difficulty}</small>
         </Toast.Body>
 
       </Toast>

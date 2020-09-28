@@ -9,6 +9,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Spinner from 'react-bootstrap/Spinner';
+
 
 // import axios from 'axios';
 
@@ -31,7 +33,7 @@ function Todo(props) {
   
   // const context = useContext(SettingsContext);
 
-  const { request, response } = useAjax();
+  const { request, response, isLoading } = useAjax();
 
   const [ list, setList ] = useState([]);
 
@@ -198,14 +200,6 @@ function Todo(props) {
 
         </Row>
 
-{/* 
-          {isLoading && 
-            <Row>
-              PUT A BOOTSTRAP LOADING INDICATOR HERE
-            </Row>
-          
-          } */}
-
 
         <Row>
 
@@ -219,8 +213,17 @@ function Todo(props) {
             </div>
           </Col>
 
-          <Col sm={6}>
+          <Col sm={8}>
             <div>
+              {isLoading && 
+              <Row>
+                <Spinner animation="border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </Spinner>
+              </Row>
+            
+              }
+
               {/* <Auth> */}
 
                 <TodoList list={list} handleComplete={_toggleComplete} handleDelete={_deleteItem}/>
