@@ -1,35 +1,54 @@
-import React, { useState } from 'react';
-// import ListGroup from 'react-bootstrap/ListGroup';
-import Card from 'react-bootstrap/Card';
+import React, { useState, useContext} from 'react';
+import Pagination from 'react-bootstrap/Pagination'
+
 import Badge from 'react-bootstrap/Badge';
 import Toast from 'react-bootstrap/Toast';
 
+//we want the context, not the provider (like in app.js)
+import { SettingsContext } from '../../context/settings/settings-context.js';
+
+// import { LoginContext } from '../../context/auth/context.js';
 
 function TodoList(props) {
+  
+  const settingsContext = useContext(SettingsContext);
+  // const authContext = useContext(LoginContext);
+
+
 
   console.log('props in list.js:', props);
 
-  // const [show, setShow] = useState(true);
 
-  // const toggleShow = () => setShow(!show);
+  const [ page, setPage ] = useState(0);
+
+  const list = props.list.filter( item =>  settingsContext.showCompleted ? true : !item.complete);
+
+  const start = settingsContext.maxVisible * page || 0;
+  const end = start + settingsContext.maxVisible || list.length;
+  const pages = new Array(Math.ceil(list.length / settingsContext.maxVisible)).fill('');
+
+  const displayList = list ? list.slice(start, end) : [];
+
+
+
 
   return (
     <>
 
-    {props.list.map(item => (
+    {displayList.map(item => (
+
 
       <>
       <br/>
 
       <Toast key={item._id} onClose={() => 
         props.handleDelete(item._id)
-        //  toggleShow()
          }>
-        <Toast.Header>
+        <Toast.Header closeButton>
     
         {item.complete ? 
-        <Badge pill variant="danger">Complete</Badge> : 
-        <Badge pill variant="success">Pending</Badge>}
+        <Badge pill variant="danger" onClick={() => props.handleComplete(item._id)}>Complete</Badge> : 
+        <Badge pill variant="success" onClick={() => props.handleComplete(item._id)}>Pending</Badge>}
 
         <strong className="mr-auto">&nbsp;&nbsp;{item.assignee}</strong>
     
@@ -37,9 +56,9 @@ function TodoList(props) {
 
         <Toast.Body>
         <strong>
-          <span onClick={() => props.handleComplete(item._id)}>{item.text}</span>
+          <span >{item.text}</span>
         </strong><br/>
-        Difficulty: {item.difficulty}
+        <small style={{display: 'block', textAlign: 'right'}}>Difficulty: {item.difficulty}</small>
         </Toast.Body>
 
       </Toast>
@@ -47,6 +66,18 @@ function TodoList(props) {
       </>
 
     ))}
+
+      <Pagination>
+        {
+          pages.map( (n, i) => 
+            <Pagination.Item key={i+1} onClick={() => setPage(i)}>
+              {i+1}
+            </Pagination.Item>,
+          )
+        }
+      
+      </Pagination>
+
   </>
 
   )

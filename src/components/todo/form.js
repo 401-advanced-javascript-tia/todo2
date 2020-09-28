@@ -5,11 +5,16 @@ import Button from 'react-bootstrap/Button';
 
 import useForm from '../../hooks/useForm.js';
 
+// import { SettingsContext } from '../../context/settings/settings-context.js';
+
 
 function TodoForm(props) {
 
-
-  // const [item, setItem] = useState({});
+  // const context = useContext(SettingsContext);
+  // can now use context.display/hide
+  // context.numToDisplay
+  // context.sortByDifficulty
+ 
 
   const [formData, setFormData] = useState({});
 
@@ -20,18 +25,6 @@ function TodoForm(props) {
     console.log('formData in callback', formData);
     props.handleFormSubmitToSendToList(values);
   }
-
-  // const _handleInputChange = e => {
-  //   setItem( {...item, [e.target.name]: e.target.value } );
-  //   console.log('item in _handleInputChange:', item);
-  // };
-
-  // const _handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   e.target.reset();
-  //   props.handleFormSubmitToSendToList(item);
-  //   setItem({});
-  // };
 
 
   return (

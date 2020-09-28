@@ -2,7 +2,7 @@
 A web-based task manager application, written in React. The online interface allows you to manage a visible list of to-do items in being able to add to it, delete, and update the 'complete' status. It features an intuitive and visually-appealing design using React Bootstrap components.
 
 ## Version
-0.3.0
+0.4.0
 
 ## Auther
 - Tia Low
@@ -26,7 +26,7 @@ Full-stack JavaScript developer with a diverse background of personal and profes
 - Connect to a live API for storing To Do Items
 
 ### **Phase 3: Settings and Global Context**
-- Implement user settings for displaying items
+- Implement user settings for displaying items (pagination)
 
 ### **Phase 4: Authorization**
 - Require a login to access the list

@@ -1,15 +1,25 @@
 import React from 'react';
 
-import Header from './components/header.js';
 import ToDo from './components/todo/todo.js';
 
+import SettingsProvider from './context/settings/settings-context.js'
+// import LoginProvider from './context/auth/context.js'
 
 function App() {
 
   return(
     <>
-      <Header />
-      <ToDo />
+    <SettingsProvider>
+
+      {/* <LoginProvider> */}
+
+        
+        <ToDo />
+
+      {/* </LoginProvider> */}
+
+
+    </SettingsProvider>
     </>
   )
 
