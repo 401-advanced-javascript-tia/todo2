@@ -2,24 +2,24 @@ import React from 'react';
 
 import ToDo from './components/todo/todo.js';
 
-// import SettingsProvider from './context/settings/settings-context.js'
+import SettingsProvider from './context/settings/settings-context.js'
 // import LoginProvider from './context/auth/context.js'
 
 function App() {
 
   return(
     <>
-    {/* <SettingsProvider>
+    <SettingsProvider>
 
-      <LoginProvider> */}
+      {/* <LoginProvider> */}
 
         
         <ToDo />
 
-      {/* </LoginProvider>
+      {/* </LoginProvider> */}
 
 
-    </SettingsProvider> */}
+    </SettingsProvider>
     </>
   )
 
